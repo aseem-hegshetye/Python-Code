@@ -1,0 +1,85 @@
+
+import sys
+import operator
+import math
+import time
+import numpy
+#from numpy import *
+
+
+
+from TALK_support import *
+def main():
+    count=0
+    while True:
+        if count==0:
+            connection_matrix_1=numpy.random.rand(SENTENCE.memory_matrix_columns,SENTENCE.ascii_matrix_columns)
+            #connection_matrix_1=SENTENCE.Connection_Matrix_1(connection_matrix_1) #makes 50% NaN
+            synapse_matrix_1=numpy.random.rand(SENTENCE.memory_matrix_rows*SENTENCE.memory_matrix_columns,SENTENCE.memory_matrix_rows,SENTENCE.memory_matrix_columns)
+            connection_matrix_2=numpy.random.rand(SENTENCE.memory_matrix_columns,SENTENCE.memory_matrix_rows,SENTENCE.memory_matrix_columns)
+            #connection_matrix_2=SENTENCE.Connection_Matrix_2(connection_matrix_2) #makes 50% NaN
+            synapse_matrix_2=numpy.random.rand(SENTENCE.memory_matrix_rows*SENTENCE.memory_matrix_columns,SENTENCE.memory_matrix_rows,SENTENCE.memory_matrix_columns)
+            connection_matrix_3=numpy.random.rand(SENTENCE.memory_matrix_columns,SENTENCE.memory_matrix_rows,SENTENCE.memory_matrix_columns)
+            #connection_matrix_3=SENTENCE.Connection_Matrix_2(connection_matrix_3) #function CM2 is similar to CM3
+            print('all matrixes initiated\n')
+
+
+        numpy.set_printoptions(threshold=numpy.nan)
+        numpy.set_printoptions(linewidth=999999)
+        
+        my_str = input("Enter a sentence: ")
+        sentence1=SENTENCE()  # object of class 
+        sent1=sentence1.RemovePunctuations(my_str) # also makes lower case
+        sent2=sentence1.SeparateWords(sent1) #sent2= ['how','are','you']
+        #print (sentence1.number_of_words)
+        sentence1.NumberofWords(sent2)
+        #print (sentence1.number_of_words)
+        sentence1.Length_of_each_word(sent2)
+        #print (sentence1.length_of_each_word)
+        #print(sentence1.words)
+        sentence1.Ascii_Matrix()  # self.ascii_matrix has ascii matrix now !!
+        
+        #print (connection_matrix_1)
+        connection_matrix_1=sentence1.Sdr_Matrix_1(connection_matrix_1) #store self.sdr_matrix_1
+        #input('connection_matrix1')
+        #print(connection_matrix_1)
+        
+        synapse_matrix_1=sentence1.Memory_Matrix_1(synapse_matrix_1) # builts self.memory_matrix_1
+        #print (sentence1.memory_matrix_1)
+        #input('above is  Main() memmory matrix 1')
+        #print(sentence1.sdr_matrix_1)
+        #input('above is self.sdr_matrix_1')
+        #print (synapse_matrix_1)
+        #input('above is Main() synapse_matrix_1')
+        
+        #print(connection_matrix_2)
+        #input('\n above is connection_matrix_2 \n')
+        connection_matrix_2=sentence1.Sdr_Matrix_2(connection_matrix_2) #store self.sdr_matrix_2
+        #print(sentence1.sdr_matrix_2)
+        #print(connection_matrix_2)
+        #print(sentence1.memory_matrix_1[0,:,:])
+        
+        synapse_matrix_2=sentence1.Memory_Matrix_2(synapse_matrix_2) # builts self.memory_matrix_2
+        #print (sentence1.memory_matrix_2)
+        #input('above is  memmory matrix 2')
+        #print (synapse_matrix_2)
+        
+        connection_matrix_3=sentence1.Sdr_Matrix_3(connection_matrix_3) #store self.sdr_matrix_3
+        
+        #print(sentence1.sdr_matrix_1)
+        #print('\nabove is sdr_matrix_1\n')
+        #print(sentence1.sdr_matrix_2)
+        #print('\nabove is sdr_matrix_2\n')
+        connection_matrix_3_added=sentence1.Connection_matrix_sum_of_OnSdr(sentence1.sdr_matrix_3,connection_matrix_3)
+        
+        #print(connection_matrix_3_added)
+        #print('above is connection_matrix_3_added\n')
+        #print(connection_matrix_3_added*sentence1.memory_matrix_2)
+        #print('\n above is connection_matrix_3_added*sentence1.memory_matrix_2 \n')
+        #print(sentence1.memory_matrix_2)
+        #print('\n above is memory_matrix_2 \n')
+        print(sentence1.sdr_matrix_3)
+        print('\n aobe is SDR matrix 3 \n ')
+        count=count+1
+if __name__ == '__main__':
+  main()
